@@ -20,17 +20,24 @@ public class ServiceNowController {
     @RequestMapping(value="/service-now", method={RequestMethod.POST})
     public ResponseEntity<Object> createTicket(
     		@RequestParam(value="query", defaultValue="") String query,
-    		@RequestParam(value="parameters", defaultValue="") String parameters) {
-    	
+    		@RequestParam(value="parameters", defaultValue="") String parameters) {    	
     	return serviceNowService.createTicket(query, parameters);
     }    
 
-    @RequestMapping(value="/service-now/location", method={RequestMethod.GET})
-    public ResponseEntity<String> getLocation(
-    		@RequestParam(value="limit", defaultValue="0") String limit) {
-    	
-    	ResponseEntity<String> o = serviceNowService.getLocation(limit);
-    	
-    	return o;
+    @RequestMapping(value="/service-now/locations", method={RequestMethod.GET})
+    public ResponseEntity<Object> getLocation(
+    		@RequestParam(value="limit", defaultValue="0") String limit) {    	
+    	return serviceNowService.getLocations(limit);
     }    
+
+    @RequestMapping(value="/service-now/categories", method={RequestMethod.GET})
+    public ResponseEntity<Object> getCategories() {    	
+    	return serviceNowService.getCategories();
+    }    
+
+    @RequestMapping(value="/service-now/sub-categories", method={RequestMethod.GET})
+    public ResponseEntity<Object> getSubCategories() {    	
+    	return serviceNowService.getSubCategories();
+    }    
+    
 }
