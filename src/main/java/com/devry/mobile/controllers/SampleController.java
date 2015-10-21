@@ -3,12 +3,15 @@ package com.devry.mobile.controllers;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devry.mobile.models.GpaModel;
 import com.devry.mobile.services.BannerService;
+
+import net.minidev.json.JSONObject;
 
 @RestController
 public class SampleController {
@@ -20,6 +23,13 @@ public class SampleController {
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(),
                             String.format(template, name));
+    }
+
+    @RequestMapping("/unauthorized")
+    public JSONObject unauthorized() {
+    	JSONObject jsonObject = new JSONObject();
+    	jsonObject.put("error", "Unauthorized access.");
+        return jsonObject;
     }
 
     @Autowired
